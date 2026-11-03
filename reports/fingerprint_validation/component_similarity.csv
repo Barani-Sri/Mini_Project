@@ -1,0 +1,4 @@
+Comparison Type,MFCC Similarity Mean,MFCC Similarity Std,Mel Similarity Mean,Mel Similarity Std,AST Similarity Mean,AST Similarity Std,Final Similarity Mean,Final Similarity Std
+Same Recording,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0
+Same Patient (Diff Location),0.9983,0.002,0.9446,0.0656,0.9927,0.0031,0.9856,0.0118
+Different Patients,0.997,0.0027,0.9215,0.0772,0.9892,0.0045,0.9792,0.0143

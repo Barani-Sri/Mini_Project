@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LubDub Murmur — Heart Sound Analysis System</title>
+  <meta name="description" content="AI-Powered Multi-Location Heart Sound Analysis and Murmur Detection System">
+  
+  <!-- Modern Typography: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫀</text></svg>">
+</head>
+<body class="theme-dark">
+  <!-- Background Glow & Particle Ambience -->
+  <div class="ambient-background">
+    <div class="ambient-glow glow-pink"></div>
+    <div class="ambient-glow glow-teal"></div>
+    <div class="ambient-glow glow-blue"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand" id="nav-brand" role="button" tabindex="0">
+        <div class="brand-icon-wrapper">
+          <svg class="brand-heart-svg" viewBox="0 0 32 32" width="28" height="28" fill="none">
+            <path d="M16 28S3 20 3 10a7 7 0 0 1 13-3.7A7 7 0 0 1 29 10c0 10-13 18-13 18z" fill="url(#pinkGradient)" />
+            <path d="M7 13h4l2-4 4 8 2-5 2 3h4" stroke="#00f5a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="pinkGradient" x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ff2e93" />
+                <stop offset="1" stop-color="#be185d" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">LubDub Murmur</span>
+          <span class="brand-tag">Heart Sound Analysis</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- MAIN -->
+        <div class="nav-category-header">
+          <span class="nav-category-title">MAIN</span>
+        </div>
+        <button class="nav-item active" id="nav-home" data-view="view-home">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Home</span>
+        </button>
+
+        <!-- WORKSPACE -->
+        <div class="nav-category-header">
+          <span class="nav-category-title">WORKSPACE</span>
+        </div>
+        <button class="nav-item" id="nav-new-analysis" data-view="view-patient">
+          <span class="nav-icon">🔬</span>
+          <span class="nav-label">New Analysis</span>
+        </button>
+        <button class="nav-item" id="nav-analysis" data-view="view-analysis">
+          <span class="nav-icon">🫀</span>
+          <span class="nav-label">Analysis</span>
+        </button>
+        <button class="nav-item" id="nav-recordings" data-view="view-recordings">
+          <span class="nav-icon">🎧</span>
+          <span class="nav-label">Recordings</span>
+        </button>
+
+        <!-- INSIGHTS -->
+        <div class="nav-category-header">
+          <span class="nav-category-title">INSIGHTS</span>
+        </div>
+        <button class="nav-item" id="nav-outcome" data-view="view-outcome">
+          <span class="nav-icon">🏥</span>
+          <span class="nav-label">Clinical Outcome</span>
+        </button>
+        <button class="nav-item" id="nav-attention" data-view="view-attention">
+          <span class="nav-icon">🎯</span>
+          <span class="nav-label">Multi-Location Attention</span>
+        </button>
+        <button class="nav-item" id="nav-tracking" data-view="view-tracking">
+          <span class="nav-icon">📈</span>
+          <span class="nav-label">Patient Tracking</span>
+        </button>
+        <button class="nav-item" id="nav-fingerprint" data-view="view-fingerprint">
+          <span class="nav-icon">🧬</span>
+          <span class="nav-label">Heart-Sound Fingerprint</span>
+        </button>
+        <button class="nav-item" id="nav-similarity" data-view="view-similarity">
+          <span class="nav-icon">🔎</span>
+          <span class="nav-label">Acoustic Similarity</span>
+        </button>
+
+        <!-- ASSISTANCE -->
+        <div class="nav-category-header">
+          <span class="nav-category-title">ASSISTANCE</span>
+        </div>
+        <button class="nav-item" id="nav-chatbot" data-view="view-chatbot">
+          <span class="nav-icon">🤖</span>
+          <span class="nav-label">Ask LubDub AI</span>
+        </button>
+
+        <!-- SYSTEM -->
+        <div class="nav-category-header">
+          <span class="nav-category-title">SYSTEM</span>
+        </div>
+        <button class="nav-item" id="nav-history" data-view="view-history">
+          <span class="nav-icon">📜</span>
+          <span class="nav-label">History</span>
+        </button>
+        <button class="nav-item" id="nav-integrated" data-view="view-integrated">
+          <span class="nav-icon">🩺</span>
+          <span class="nav-label">Integrated Result</span>
+        </button>
+        <button class="nav-item" id="nav-about" data-view="view-about">
+          <span class="nav-icon">ℹ️</span>
+          <span class="nav-label">About</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-badge">
+          <span class="status-dot pulse-green"></span>
+          <span class="status-label">AI Pipeline Ready</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="app-main-wrapper">
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-breadcrumb">
+          <span id="current-view-title" class="breadcrumb-current">Home</span>
+        </div>
+
+        <div class="header-right">
+          <div class="patient-status-chip hidden" id="header-patient-chip">
+            <span class="chip-icon">👤</span>
+            <span class="chip-label">Patient:</span>
+            <span class="chip-name" id="header-patient-name">Anonymous</span>
+          </div>
+
+          <div class="header-status-pill">
+            <span class="status-dot"></span>
+            <span>AI Model Online</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 4-STEP PROGRESS INDICATOR (Visible during test flow) -->
+      <div class="test-progress-bar-container hidden" id="flow-stepper">
+        <div class="stepper-wrapper">
+          <div class="stepper-step" id="step-node-1" data-step="1">
+            <div class="step-circle">1</div>
+            <span class="step-name">Patient Info</span>
+          </div>
+          <div class="stepper-line" id="step-line-1"></div>
+          <div class="stepper-step" id="step-node-2" data-step="2">
+            <div class="step-circle">2</div>
+            <span class="step-name">Recordings</span>
+          </div>
+          <div class="stepper-line" id="step-line-2"></div>
+          <div class="stepper-step" id="step-node-3" data-step="3">
+            <div class="step-circle">3</div>
+            <span class="step-name">Analysis</span>
+          </div>
+          <div class="stepper-line" id="step-line-3"></div>
+          <div class="stepper-step" id="step-node-4" data-step="4">
+            <div class="step-circle">4</div>
+            <span class="step-name">Results</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT VIEWS -->
+      <main class="content-body">
+        
+        <!-- ====================================================================
+             VIEW 1: 🏠 HOME (OVERVIEW)
+             ==================================================================== -->
+        <section id="view-home" class="view-section active">
+          <div class="landing-hero-card premium-card glow-border-pink">
+            <div class="hero-graphic">
+              <div class="pulse-heart-container">
+                <svg class="hero-heart-svg" viewBox="0 0 100 100" width="120" height="120" fill="none">
+                  <path d="M50 88S10 62 10 32a22 22 0 0 1 40-11 22 22 0 0 1 40 11c0 30-40 56-40 56z" fill="url(#heroHeartGradient)" filter="url(#glowFilter)" />
+                  <path class="animated-ecg-path" d="M22 42h12l5-12 11 26 7-18 6 10h15" stroke="#00f5a0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <defs>
+                    <linearGradient id="heroHeartGradient" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#ff2e93" />
+                      <stop offset="1" stop-color="#be185d" />
+                    </linearGradient>
+                    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="6" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+                </svg>
+                <div class="hero-ring ring-pink"></div>
+                <div class="hero-ring ring-teal"></div>
+              </div>
+            </div>
+
+            <div class="hero-text-content">
+              <h1 class="hero-title">LubDub Murmur</h1>
+              <p class="hero-subtitle">AI-Powered Multi-Location Heart Sound Analysis</p>
+              <p class="hero-description">Screen for heart murmurs, evaluate clinical outcomes, inspect multi-valve attention, and track longitudinal acoustic changes across phonocardiogram recordings.</p>
+            </div>
+
+            <div class="hero-button-group">
+              <button id="btn-hero-start" class="btn btn-primary-neon btn-glow-pink">
+                <span>START NEW ANALYSIS →</span>
+              </button>
+              <button id="btn-hero-demo" class="btn btn-secondary-teal">
+                <span class="btn-demo-tag">CIRCOR DEMO</span>
+                <span>TRY DEMO (Patient 40840)</span>
+              </button>
+            </div>
+
+            <div class="hero-stats-row">
+              <div class="stat-badge">
+                <span class="stat-icon">🩺</span>
+                <div class="stat-info">
+                  <span class="stat-value">5 Valve Sites</span>
+                  <span class="stat-label">AV, MV, PV, TV, Phc</span>
+                </div>
+              </div>
+              <div class="stat-badge">
+                <span class="stat-icon">🧠</span>
+                <div class="stat-info">
+                  <span class="stat-value">Multi-Task Net</span>
+                  <span class="stat-label">Murmur & Outcome</span>
+                </div>
+              </div>
+              <div class="stat-badge">
+                <span class="stat-icon">⚡</span>
+                <div class="stat-info">
+                  <span class="stat-value">Masked Attention</span>
+                  <span class="stat-label">Explainable Fusion</span>
+                </div>
+              </div>
+              <div class="stat-badge">
+                <span class="stat-icon">🧬</span>
+                <div class="stat-info">
+                  <span class="stat-value">Fingerprint V2</span>
+                  <span class="stat-label">1,264-D Similarity</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUICK DESTINATION CARDS -->
+          <div class="home-destinations-grid">
+            <div class="home-dest-card" onclick="document.getElementById('nav-analysis').click();" role="button" tabindex="0">
+              <div class="dest-icon">🫀</div>
+              <h3 class="dest-title">Analysis</h3>
+              <p class="dest-desc">View primary heart murmur detection screening and calibrated model confidence probability.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-recordings').click();" role="button" tabindex="0">
+              <div class="dest-icon">🎧</div>
+              <h3 class="dest-title">Recordings</h3>
+              <p class="dest-desc">Listen to heart sound recordings and inspect auscultation channel durations and sample rates.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-outcome').click();" role="button" tabindex="0">
+              <div class="dest-icon">🏥</div>
+              <h3 class="dest-title">Clinical Outcome</h3>
+              <p class="dest-desc">Examine clinical outcome classification alongside patient demographic profile.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-attention').click();" role="button" tabindex="0">
+              <div class="dest-icon">🎯</div>
+              <h3 class="dest-title">Multi-Location Attention</h3>
+              <p class="dest-desc">Explore learned neural attention weights across anatomical valve auscultation sites.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-tracking').click();" role="button" tabindex="0">
+              <div class="dest-icon">📈</div>
+              <h3 class="dest-title">Patient Tracking</h3>
+              <p class="dest-desc">Track longitudinal acoustic variations, percentage point shifts, and session trajectory.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-fingerprint').click();" role="button" tabindex="0">
+              <div class="dest-icon">🧬</div>
+              <h3 class="dest-title">Heart-Sound Fingerprint</h3>
+              <p class="dest-desc">Inspect compact 1,264-D acoustic identity representation (MFCC + Mel + AST embeddings).</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-similarity').click();" role="button" tabindex="0">
+              <div class="dest-icon">🔎</div>
+              <h3 class="dest-title">Acoustic Similarity</h3>
+              <p class="dest-desc">Find top-5 reference heart-sound recordings with closest acoustic spectral-temporal timbre.</p>
+            </div>
+            <div class="home-dest-card" onclick="document.getElementById('nav-chatbot').click();" role="button" tabindex="0">
+              <div class="dest-icon">🤖</div>
+              <h3 class="dest-title">Ask LubDub AI</h3>
+              <p class="dest-desc">Discuss your screening result with a personalized, contextual AI assistant with medical guardrails.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 2: 🔬 NEW ANALYSIS — STEP 1 (PATIENT INFO)
+             ==================================================================== -->
+        <section id="view-patient" class="view-section">
+          <div class="flow-card premium-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">Patient Information</h2>
+                <p class="card-subheading">Enter patient identification for this auscultation testing session.</p>
+              </div>
+              <div class="step-pill">Step 1 of 4</div>
+            </div>
+
+            <form id="patient-info-form" class="patient-form-grid" onsubmit="event.preventDefault();">
+              <div class="form-panel">
+                <div class="panel-tag">
+                  <span class="tag-icon">👤</span>
+                  <span>Patient Identification</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="field-patient-name" class="input-label">
+                    <span>Patient Name</span>
+                    <span class="req-star">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="field-patient-name" 
+                    class="input-control" 
+                    placeholder="e.g. John Doe / Clinical Subject" 
+                    required 
+                    autocomplete="off"
+                  >
+                  <span class="input-helper">Used for identifying and displaying the patient report.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="field-patient-id" class="input-label">
+                    <span>Patient ID / Medical Record ID</span>
+                    <span class="optional-badge">(Optional)</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="field-patient-id" 
+                    class="input-control" 
+                    placeholder="e.g. CIRCOR-PT-40840" 
+                    autocomplete="off"
+                  >
+                </div>
+              </div>
+
+              <div class="form-panel model-info-panel">
+                <div class="panel-tag teal-tag">
+                  <span class="tag-icon">🔬</span>
+                  <span>Model Input Information</span>
+                </div>
+
+                <div class="model-explanation-box">
+                  <div class="explanation-icon">⚡</div>
+                  <div class="explanation-content">
+                    <h4 class="explanation-title">Pure Acoustic Neural Pipeline</h4>
+                    <p class="explanation-text">LubDub Murmur's neural network operates directly on multi-location Phonocardiogram (PCG) acoustic wave signals (AV, MV, PV, TV, Phc). No demographic or clinical tabular features are fed into the neural network.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions-row">
+                <button type="submit" id="btn-patient-continue" class="btn btn-primary-neon">
+                  <span>Continue to Uploads →</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 3: 🔬 NEW ANALYSIS — STEP 2 (UPLOAD DROPZONES)
+             ==================================================================== -->
+        <section id="view-upload" class="view-section">
+          <div class="flow-card premium-card wide-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">Upload Heart Sound Recordings</h2>
+                <p class="card-subheading">Upload recordings from the available auscultation locations. Locations are optional; missing sites will be dynamically masked during neural inference.</p>
+              </div>
+              <div class="patient-badge-chip">
+                <span>Patient:</span>
+                <strong id="recordings-patient-name">Anonymous</strong>
+              </div>
+            </div>
+
+            <!-- 5 AUSCULTATION UPLOAD CARDS -->
+            <div class="recordings-grid">
+              <!-- CARD 1: AV -->
+              <div class="valve-upload-card" id="card-AV" data-location="AV">
+                <div class="valve-card-top">
+                  <div class="valve-icon-badge badge-av">AV</div>
+                  <div class="valve-text">
+                    <h3 class="valve-title">Aortic Valve</h3>
+                    <span class="valve-sub">2nd R. Intercostal Space</span>
+                  </div>
+                  <span class="upload-check-indicator hidden">✓</span>
+                </div>
+                
+                <div class="valve-card-body">
+                  <div class="drop-zone" id="drop-AV">
+                    <input type="file" id="file-AV" class="hidden-file-input" accept=".wav,audio/wav,audio/x-wav">
+                    <label for="file-AV" class="btn-select-file">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                      <span>Upload WAV</span>
+                    </label>
+                    <span class="drop-label">or drag .wav here</span>
+                  </div>
+
+                  <div class="loaded-file-view hidden">
+                    <div class="file-info-row">
+                      <span class="loaded-file-name">filename.wav</span>
+                      <span class="loaded-file-dur">00.0s</span>
+                    </div>
+                    <audio class="custom-audio-player" controls preload="metadata"></audio>
+                    <button type="button" class="btn-remove-rec" title="Remove audio">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 2: MV -->
+              <div class="valve-upload-card" id="card-MV" data-location="MV">
+                <div class="valve-card-top">
+                  <div class="valve-icon-badge badge-mv">MV</div>
+                  <div class="valve-text">
+                    <h3 class="valve-title">Mitral Valve</h3>
+                    <span class="valve-sub">5th L. Intercostal / Apex</span>
+                  </div>
+                  <span class="upload-check-indicator hidden">✓</span>
+                </div>
+                
+                <div class="valve-card-body">
+                  <div class="drop-zone" id="drop-MV">
+                    <input type="file" id="file-MV" class="hidden-file-input" accept=".wav,audio/wav,audio/x-wav">
+                    <label for="file-MV" class="btn-select-file">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                      <span>Upload WAV</span>
+                    </label>
+                    <span class="drop-label">or drag .wav here</span>
+                  </div>
+
+                  <div class="loaded-file-view hidden">
+                    <div class="file-info-row">
+                      <span class="loaded-file-name">filename.wav</span>
+                      <span class="loaded-file-dur">00.0s</span>
+                    </div>
+                    <audio class="custom-audio-player" controls preload="metadata"></audio>
+                    <button type="button" class="btn-remove-rec" title="Remove audio">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 3: PV -->
+              <div class="valve-upload-card" id="card-PV" data-location="PV">
+                <div class="valve-card-top">
+                  <div class="valve-icon-badge badge-pv">PV</div>
+                  <div class="valve-text">
+                    <h3 class="valve-title">Pulmonary Valve</h3>
+                    <span class="valve-sub">2nd L. Intercostal Space</span>
+                  </div>
+                  <span class="upload-check-indicator hidden">✓</span>
+                </div>
+                
+                <div class="valve-card-body">
+                  <div class="drop-zone" id="drop-PV">
+                    <input type="file" id="file-PV" class="hidden-file-input" accept=".wav,audio/wav,audio/x-wav">
+                    <label for="file-PV" class="btn-select-file">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                      <span>Upload WAV</span>
+                    </label>
+                    <span class="drop-label">or drag .wav here</span>
+                  </div>
+
+                  <div class="loaded-file-view hidden">
+                    <div class="file-info-row">
+                      <span class="loaded-file-name">filename.wav</span>
+                      <span class="loaded-file-dur">00.0s</span>
+                    </div>
+                    <audio class="custom-audio-player" controls preload="metadata"></audio>
+                    <button type="button" class="btn-remove-rec" title="Remove audio">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 4: TV -->
+              <div class="valve-upload-card" id="card-TV" data-location="TV">
+                <div class="valve-card-top">
+                  <div class="valve-icon-badge badge-tv">TV</div>
+                  <div class="valve-text">
+                    <h3 class="valve-title">Tricuspid Valve</h3>
+                    <span class="valve-sub">4th L. Intercostal Sternal</span>
+                  </div>
+                  <span class="upload-check-indicator hidden">✓</span>
+                </div>
+                
+                <div class="valve-card-body">
+                  <div class="drop-zone" id="drop-TV">
+                    <input type="file" id="file-TV" class="hidden-file-input" accept=".wav,audio/wav,audio/x-wav">
+                    <label for="file-TV" class="btn-select-file">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                      <span>Upload WAV</span>
+                    </label>
+                    <span class="drop-label">or drag .wav here</span>
+                  </div>
+
+                  <div class="loaded-file-view hidden">
+                    <div class="file-info-row">
+                      <span class="loaded-file-name">filename.wav</span>
+                      <span class="loaded-file-dur">00.0s</span>
+                    </div>
+                    <audio class="custom-audio-player" controls preload="metadata"></audio>
+                    <button type="button" class="btn-remove-rec" title="Remove audio">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 5: Phc / Other -->
+              <div class="valve-upload-card" id="card-Phc" data-location="Phc">
+                <div class="valve-card-top">
+                  <div class="valve-icon-badge badge-phc">Phc</div>
+                  <div class="valve-text">
+                    <h3 class="valve-title">Phc / Other Site</h3>
+                    <span class="valve-sub">Additional Cardiac Site</span>
+                  </div>
+                  <span class="upload-check-indicator hidden">✓</span>
+                </div>
+                
+                <div class="valve-card-body">
+                  <div class="drop-zone" id="drop-Phc">
+                    <input type="file" id="file-Phc" class="hidden-file-input" accept=".wav,audio/wav,audio/x-wav">
+                    <label for="file-Phc" class="btn-select-file">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                      <span>Upload WAV</span>
+                    </label>
+                    <span class="drop-label">or drag .wav here</span>
+                  </div>
+
+                  <div class="loaded-file-view hidden">
+                    <div class="file-info-row">
+                      <span class="loaded-file-name">filename.wav</span>
+                      <span class="loaded-file-dur">00.0s</span>
+                    </div>
+                    <audio class="custom-audio-player" controls preload="metadata"></audio>
+                    <button type="button" class="btn-remove-rec" title="Remove audio">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="upload-footer-bar">
+              <div class="summary-count-box">
+                <span class="count-bullet">●</span>
+                <span id="label-loaded-count">0 of 5 auscultation recordings loaded</span>
+                <span class="min-requirement">(Minimum 1 recording required)</span>
+              </div>
+
+              <button id="btn-trigger-analysis" class="btn btn-primary-neon btn-glow-pink btn-large" disabled>
+                <span>✦ Analyze Heart Sound →</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 4: 🔬 NEW ANALYSIS — STEP 3 (PROCESSING SCREEN)
+             ==================================================================== -->
+        <section id="view-processing" class="view-section">
+          <div class="processing-card premium-card text-center">
+            <div class="processing-visual">
+              <div class="heartbeat-pulse-glow">
+                <span class="pulse-heart-emoji">🫀</span>
+                <div class="pulse-ring-outer"></div>
+                <div class="pulse-ring-inner"></div>
+              </div>
+            </div>
+
+            <h2 class="processing-title">Analyzing Heart Sounds...</h2>
+            <p class="processing-subtitle">Executing multi-location digital signal processing, feature extraction, and deep neural inference.</p>
+
+            <div class="pipeline-flow-list">
+              <div class="pipe-step step-done" id="pipe-audio">
+                <span class="pipe-icon">✓</span>
+                <span class="pipe-text">Audio Loaded</span>
+              </div>
+              <div class="pipe-step" id="pipe-prep">
+                <span class="pipe-icon">○</span>
+                <span class="pipe-text">Preprocessing (2000Hz, 25-400Hz Bandpass, Peak Norm)</span>
+              </div>
+              <div class="pipe-step" id="pipe-feat">
+                <span class="pipe-icon">○</span>
+                <span class="pipe-text">Feature Extraction (120-dim Combined MFCC & Mel-spectrogram)</span>
+              </div>
+              <div class="pipe-step" id="pipe-repr">
+                <span class="pipe-icon">○</span>
+                <span class="pipe-text">Multi-Location Fusion (1, 5, 120, 501)</span>
+              </div>
+              <div class="pipe-step" id="pipe-pred">
+                <span class="pipe-icon">○</span>
+                <span class="pipe-text">AI Prediction (MultiLocationHeartSoundNet)</span>
+              </div>
+            </div>
+
+            <!-- DEEP ANALYSIS RUNNING NOTICE & ELAPSED TIMER -->
+            <div id="processing-deep-analysis-notice" class="processing-deep-notice hidden">
+              <div class="deep-notice-header">
+                <div class="deep-notice-title-group">
+                  <span class="deep-notice-pulse">⚡</span>
+                  <span class="deep-notice-title">Deep Analysis in Progress</span>
+                </div>
+                <span class="deep-notice-timer" id="processing-elapsed-timer">Elapsed: 00:00</span>
+              </div>
+              <p class="deep-notice-desc">Running multi-location neural inference, acoustic fingerprint generation, and similarity analysis...</p>
+              <p class="deep-notice-sub">This may take 1–2 minutes on CPU. Please wait.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 5: 🫀 ANALYSIS (DEDICATED HEART MURMUR SCREENING)
+             ==================================================================== -->
+        <section id="view-analysis" class="view-section">
+          <!-- EMPTY STATE NOTICE (Shown if no analysis run yet) -->
+          <div class="view-empty-state hidden" id="analysis-empty-state">
+            <div class="empty-state-icon">🫀</div>
+            <h3 class="empty-state-title">No Active Analysis Available</h3>
+            <p class="empty-state-desc">You have not analyzed any heart sound recordings yet. Start a new analysis or try the CirCor demo to view the murmur detection result.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="results-dashboard-card premium-card wide-card" id="analysis-content-panel">
+            <div class="results-header-bar">
+              <div class="patient-profile-summary">
+                <span class="profile-label">Patient:</span>
+                <h2 class="profile-name" id="res-patient-name">Patient Name</h2>
+                <span class="demo-tag-pill hidden" id="tag-demo-murmur">CirCor Test Patient Demo — 40840</span>
+              </div>
+              <div class="header-actions-group">
+                <button class="btn btn-primary-neon btn-download-report" id="btn-download-report-header" onclick="downloadPatientReport();" title="Download Official Patient PDF Report">
+                  <span>📄 Download Patient Report</span>
+                </button>
+                <div class="step-pill">Heart Murmur AI Screening</div>
+              </div>
+            </div>
+
+            <!-- AUTOMATIC RESULT EXPLANATION HERO BANNER -->
+            <div class="ai-explanation-hero glow-border-pink" id="ai-explanation-hero">
+              <div class="ai-hero-header">
+                <div class="ai-hero-title-group">
+                  <span class="ai-hero-badge">🧠 LubDub AI Result Explanation</span>
+                  <h3 class="ai-hero-headline" id="ai-hero-status-title">🫀 Normal Heart Sound Pattern</h3>
+                </div>
+                <div class="ai-hero-conf-pill" id="ai-hero-conf-pill">Confidence: 82.0%</div>
+              </div>
+
+              <div class="ai-explanation-grid">
+                <div class="ai-explanation-card">
+                  <div class="ai-card-title"><span class="ai-card-icon">💡</span> What this means</div>
+                  <p class="ai-card-body" id="ai-text-what-means">The AI did not detect acoustic patterns strongly associated with a heart murmur in this recording.</p>
+                </div>
+
+                <div class="ai-explanation-card">
+                  <div class="ai-card-title"><span class="ai-card-icon">🩺</span> Clinical Context & Precautions</div>
+                  <p class="ai-card-body" id="ai-text-medical-context">This is an AI screening result and does not replace professional medical evaluation.</p>
+                </div>
+
+                <div class="ai-explanation-card full-width" id="ai-card-next-steps">
+                  <div class="ai-card-title"><span class="ai-card-icon">📋</span> Recommended Next Steps</div>
+                  <p class="ai-card-body" id="ai-text-next-steps">Continue regular routine health check-ups and consult a doctor if you experience concerning symptoms.</p>
+                </div>
+              </div>
+
+              <!-- EXPANDABLE TECHNICAL EXPLANATION ACCORDION -->
+              <details class="ai-tech-accordion" id="ai-tech-accordion">
+                <summary class="ai-tech-summary">
+                  <div class="summary-left">
+                    <span class="tech-icon">🔬</span>
+                    <span class="tech-title">Technical Explanation</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </summary>
+                <div class="ai-tech-content">
+                  <div class="tech-detail-item">
+                    <span class="tech-detail-title">Statistical Confidence Calibration</span>
+                    <p class="tech-detail-text" id="ai-tech-confidence">Confidence represents algorithm feature alignment, not clinical likelihood or diagnosis.</p>
+                  </div>
+                  <div class="tech-detail-item">
+                    <span class="tech-detail-title">Multi-Valve Acoustic Attention Analysis</span>
+                    <p class="tech-detail-text" id="ai-tech-location">Multi-location valve contribution data is evaluated across active auscultation channels.</p>
+                  </div>
+                  <div class="tech-detail-item">
+                    <span class="tech-detail-title">Neural Model & Pipeline Architecture</span>
+                    <pre class="tech-detail-code" id="ai-tech-pipeline">• Feature Extraction: 120-dim combined representation (MFCC + Mel-spectrogram)
+• Neural Architecture: MultiLocationHeartSoundNet (2D CNN + Masked Attention Fusion)
+• Objective: Multi-task murmur detection and clinical outcome classification</pre>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- PRIMARY MURMUR DETECTION RESULT BOX -->
+            <div class="result-box primary-result-box glow-border-pink" style="margin-top: 1.5rem;">
+              <div class="box-tag">Murmur Detection Screening Result</div>
+              <div class="decision-badge" id="badge-murmur-pred">
+                <span class="decision-icon" id="icon-murmur-pred">●</span>
+                <span class="decision-text" id="text-murmur-pred">PRESENT</span>
+              </div>
+
+              <div class="probability-metric-group">
+                <div class="prob-labels-row">
+                  <span class="prob-title">Model Confidence Probability</span>
+                  <span class="prob-numeric" id="val-murmur-prob">52.75%</span>
+                </div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill fill-pink" id="bar-murmur-prob" style="width: 52.75%;"></div>
+                </div>
+              </div>
+
+              <div class="result-status-tag" id="desc-murmur-status">
+                Probabilistic detection from acoustic auscultation features
+              </div>
+            </div>
+
+            <div class="medical-disclaimer-card" style="margin-top: 1.5rem;">
+              <span class="disclaimer-icon">⚠️</span>
+              <span class="disclaimer-body">This is an AI model prediction for research/screening purposes and is not a medical diagnosis.</span>
+            </div>
+
+            <!-- QUICK NAVIGATION ACTIONS -->
+            <div class="results-actions-bar space-between" style="margin-top: 1.5rem;">
+              <div class="actions-left-group">
+                <button class="btn btn-secondary-teal" onclick="document.getElementById('nav-recordings').click();">
+                  <span>🎧 View Recordings</span>
+                </button>
+                <button class="btn btn-secondary-teal" onclick="document.getElementById('nav-outcome').click();">
+                  <span>🏥 Clinical Outcome</span>
+                </button>
+                <button class="btn btn-secondary-teal" onclick="document.getElementById('nav-attention').click();">
+                  <span>🎯 Attention Net</span>
+                </button>
+              </div>
+
+              <div class="actions-right-group" style="display: flex; gap: 0.75rem; align-items: center;">
+                <button class="btn btn-secondary-teal btn-download-report" id="btn-download-report-bottom" onclick="downloadPatientReport();" title="Download Patient Report PDF">
+                  <span>📄 Download Report PDF</span>
+                </button>
+                <button class="btn btn-primary-neon" onclick="document.getElementById('nav-chatbot').click();">
+                  <span>🤖 Ask LubDub AI →</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 6: 🎧 RECORDINGS (DEDICATED AUDIO PLAYBACK PAGE)
+             ==================================================================== -->
+        <section id="view-recordings" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="recordings-empty-state">
+            <div class="empty-state-icon">🎧</div>
+            <h3 class="empty-state-title">No Audio Recordings Loaded</h3>
+            <p class="empty-state-desc">Upload phonocardiogram recordings or run the CirCor demo to listen to valve playback.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Upload Recordings</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="flow-card premium-card wide-card" id="recordings-content-panel">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">Heart Sound Recordings</h2>
+                <p class="card-subheading">Listen to and inspect audio recordings captured across the auscultation locations.</p>
+              </div>
+              <div class="patient-badge-chip">
+                <span>Patient:</span>
+                <strong id="recordings-page-patient-name">Anonymous</strong>
+              </div>
+            </div>
+
+            <div class="recordings-status-strip">
+              <div class="status-summary-item">
+                <span class="status-summary-icon">🎧</span>
+                <span id="recordings-page-loaded-count" class="status-summary-text">4 of 5 auscultation recordings available</span>
+              </div>
+              <div class="status-summary-badge">Audio Quality: Standardized (2,000 Hz)</div>
+            </div>
+
+            <!-- 5 DEDICATED PLAYBACK CARDS -->
+            <div class="recordings-audio-grid" id="recordings-page-audio-grid">
+              <!-- AV Audio Card -->
+              <div class="rec-audio-card" id="rec-card-AV">
+                <div class="rec-card-header">
+                  <div class="valve-icon-badge badge-av">AV</div>
+                  <div class="rec-card-titles">
+                    <h4 class="rec-valve-title">Aortic Valve</h4>
+                    <span class="rec-valve-loc">2nd R. Intercostal Space</span>
+                  </div>
+                  <span class="rec-avail-badge chip-active" id="rec-status-AV">Available</span>
+                </div>
+                <div class="rec-player-body">
+                  <div class="rec-meta-row">
+                    <span>Duration: <strong id="rec-dur-AV">-- s</strong></span>
+                    <span>Sample Rate: <strong>2000 Hz</strong></span>
+                  </div>
+                  <audio class="custom-audio-player" id="rec-audio-AV" controls preload="metadata"></audio>
+                </div>
+              </div>
+
+              <!-- MV Audio Card -->
+              <div class="rec-audio-card" id="rec-card-MV">
+                <div class="rec-card-header">
+                  <div class="valve-icon-badge badge-mv">MV</div>
+                  <div class="rec-card-titles">
+                    <h4 class="rec-valve-title">Mitral Valve</h4>
+                    <span class="rec-valve-loc">5th L. Intercostal / Apex</span>
+                  </div>
+                  <span class="rec-avail-badge chip-active" id="rec-status-MV">Available</span>
+                </div>
+                <div class="rec-player-body">
+                  <div class="rec-meta-row">
+                    <span>Duration: <strong id="rec-dur-MV">-- s</strong></span>
+                    <span>Sample Rate: <strong>2000 Hz</strong></span>
+                  </div>
+                  <audio class="custom-audio-player" id="rec-audio-MV" controls preload="metadata"></audio>
+                </div>
+              </div>
+
+              <!-- PV Audio Card -->
+              <div class="rec-audio-card" id="rec-card-PV">
+                <div class="rec-card-header">
+                  <div class="valve-icon-badge badge-pv">PV</div>
+                  <div class="rec-card-titles">
+                    <h4 class="rec-valve-title">Pulmonary Valve</h4>
+                    <span class="rec-valve-loc">2nd L. Intercostal Space</span>
+                  </div>
+                  <span class="rec-avail-badge chip-active" id="rec-status-PV">Available</span>
+                </div>
+                <div class="rec-player-body">
+                  <div class="rec-meta-row">
+                    <span>Duration: <strong id="rec-dur-PV">-- s</strong></span>
+                    <span>Sample Rate: <strong>2000 Hz</strong></span>
+                  </div>
+                  <audio class="custom-audio-player" id="rec-audio-PV" controls preload="metadata"></audio>
+                </div>
+              </div>
+
+              <!-- TV Audio Card -->
+              <div class="rec-audio-card" id="rec-card-TV">
+                <div class="rec-card-header">
+                  <div class="valve-icon-badge badge-tv">TV</div>
+                  <div class="rec-card-titles">
+                    <h4 class="rec-valve-title">Tricuspid Valve</h4>
+                    <span class="rec-valve-loc">4th L. Intercostal Sternal</span>
+                  </div>
+                  <span class="rec-avail-badge chip-active" id="rec-status-TV">Available</span>
+                </div>
+                <div class="rec-player-body">
+                  <div class="rec-meta-row">
+                    <span>Duration: <strong id="rec-dur-TV">-- s</strong></span>
+                    <span>Sample Rate: <strong>2000 Hz</strong></span>
+                  </div>
+                  <audio class="custom-audio-player" id="rec-audio-TV" controls preload="metadata"></audio>
+                </div>
+              </div>
+
+              <!-- Phc Audio Card -->
+              <div class="rec-audio-card" id="rec-card-Phc">
+                <div class="rec-card-header">
+                  <div class="valve-icon-badge badge-phc">Phc</div>
+                  <div class="rec-card-titles">
+                    <h4 class="rec-valve-title">Phc / Additional Site</h4>
+                    <span class="rec-valve-loc">Additional Auscultation</span>
+                  </div>
+                  <span class="rec-avail-badge chip-inactive" id="rec-status-Phc">Not Provided</span>
+                </div>
+                <div class="rec-player-body">
+                  <div class="rec-meta-row">
+                    <span>Duration: <strong id="rec-dur-Phc">-- s</strong></span>
+                    <span>Sample Rate: <strong>2000 Hz</strong></span>
+                  </div>
+                  <audio class="custom-audio-player" id="rec-audio-Phc" controls preload="metadata"></audio>
+                </div>
+              </div>
+            </div>
+
+            <!-- TECHNICAL AUDIO CONTEXT -->
+            <div class="location-patient-explanation" style="margin-top: 1.5rem;">
+              <div class="expl-title-row">
+                <span class="expl-icon">💡</span>
+                <h4 class="expl-heading">Auscultation Acoustic Processing</h4>
+              </div>
+              <p class="expl-paragraph">
+                Phonocardiograms are resampled to 2,000 Hz, passed through a Butterworth 25–400 Hz bandpass filter to attenuate sensor friction and baseline wander, and peak-normalized. Multi-location recordings are fed into the shared neural feature extractor to derive synchronous mel-frequency representations.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 7: 🏥 CLINICAL OUTCOME (DEDICATED OUTCOME PAGE)
+             ==================================================================== -->
+        <section id="view-outcome" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="outcome-empty-state">
+            <div class="empty-state-icon">🏥</div>
+            <h3 class="empty-state-title">No Clinical Outcome Data Available</h3>
+            <p class="empty-state-desc">Run an analysis on heart sound recordings or load the CirCor demo to view clinical outcome classification.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="results-dashboard-card premium-card wide-card" id="outcome-content-panel">
+            <div class="results-header-bar">
+              <div class="patient-profile-summary">
+                <span class="profile-label">Patient:</span>
+                <h2 class="profile-name" id="outcome-patient-name">Patient Name</h2>
+                <span class="demo-tag-pill hidden" id="tag-demo-outcome">CirCor Test Patient Demo — 40840</span>
+              </div>
+              <div class="header-actions-group">
+                <button class="btn btn-primary-neon btn-download-report" onclick="downloadPatientReport();" title="Download Official Patient PDF Report">
+                  <span>📄 Download Patient Report</span>
+                </button>
+                <div class="step-pill">Clinical Outcome Classification</div>
+              </div>
+            </div>
+
+            <!-- DEMOGRAPHIC DETAILS -->
+            <div class="demographic-strip-card" id="demographics-strip">
+              <div class="demo-stat-item">
+                <span class="demo-label">Age Group</span>
+                <span class="demo-value" id="demo-val-age">N/A</span>
+              </div>
+              <div class="demo-stat-item">
+                <span class="demo-label">Biological Sex</span>
+                <span class="demo-value" id="demo-val-sex">N/A</span>
+              </div>
+              <div class="demo-stat-item">
+                <span class="demo-label">Height</span>
+                <span class="demo-value" id="demo-val-height">N/A</span>
+              </div>
+              <div class="demo-stat-item">
+                <span class="demo-label">Weight</span>
+                <span class="demo-value" id="demo-val-weight">N/A</span>
+              </div>
+            </div>
+
+            <!-- PRIMARY RESULT CARD: CLINICAL OUTCOME -->
+            <div class="result-box primary-result-box glow-border-pink" style="margin-top: 1.5rem;">
+              <div class="box-tag">Clinical Outcome Prediction</div>
+              <div class="decision-badge" id="badge-outcome-pred">
+                <span class="decision-icon" id="icon-outcome-pred">●</span>
+                <span class="decision-text" id="text-outcome-pred">ABNORMAL</span>
+              </div>
+
+              <div class="probability-metric-group">
+                <div class="prob-labels-row">
+                  <span class="prob-title">Abnormality Probability</span>
+                  <span class="prob-numeric" id="val-outcome-prob">51.83%</span>
+                </div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill fill-pink" id="bar-outcome-prob" style="width: 51.83%;"></div>
+                </div>
+              </div>
+
+              <div class="result-status-tag" id="desc-outcome-status">
+                Auscultatory clinical outcome classification derived from multi-valve PCG acoustic features
+              </div>
+            </div>
+
+            <!-- CLINICAL RISK & CONTEXT CARD -->
+            <div class="location-patient-explanation" style="margin-top: 1.5rem;">
+              <div class="expl-title-row">
+                <span class="expl-icon">🩺</span>
+                <h4 class="expl-heading">Clinical Outcome Definition</h4>
+              </div>
+              <p class="expl-paragraph">
+                Clinical outcome classification evaluates whether the overall auscultatory recording set demonstrates abnormal acoustic characteristics warranting comprehensive clinical cardiology evaluation. An abnormal outcome prediction suggests that acoustic signals deviate from healthy pediatric/adolescent baselines.
+              </p>
+            </div>
+
+            <div class="medical-disclaimer-card" style="margin-top: 1.5rem;">
+              <span class="disclaimer-icon">⚠️</span>
+              <span class="disclaimer-body">This is an AI model prediction for research/screening purposes and is not a medical diagnosis.</span>
+            </div>
+
+            <div class="results-actions-bar space-between" style="margin-top: 1.5rem;">
+              <button class="btn btn-secondary-teal" onclick="document.getElementById('nav-analysis').click();">
+                <span>🫀 View Murmur Analysis</span>
+              </button>
+              <button class="btn btn-primary-neon" onclick="document.getElementById('nav-chatbot').click();">
+                <span>🤖 Ask LubDub AI →</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 8: 🎯 MULTI-LOCATION ATTENTION (DEDICATED ATTENTION PAGE)
+             ==================================================================== -->
+        <section id="view-attention" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="attention-empty-state">
+            <div class="empty-state-icon">🎯</div>
+            <h3 class="empty-state-title">No Attention Data Available</h3>
+            <p class="empty-state-desc">Run an analysis to inspect learned neural attention weights across the auscultation sites.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="multi-location-section premium-card wide-card" id="multi-location-analysis-section">
+            <div class="section-header-row">
+              <div class="section-title-group">
+                <div class="section-tag-badge">
+                  <span class="tag-heart-icon">🎯</span>
+                  <span>Multi-Location Attention Net</span>
+                </div>
+                <h3 class="section-main-heading">Auscultatory Valve Signal Contribution</h3>
+                <p class="section-sub-heading">Shows the relative contribution of each recording location (Aortic, Mitral, Pulmonary, Tricuspid) to the model's overall analysis.</p>
+              </div>
+              <div class="valve-count-pill" id="valve-active-count-pill">4 of 4 Sites Evaluated</div>
+            </div>
+
+            <!-- HEART DIAGRAM & BREAKDOWN DUAL PANEL -->
+            <div class="heart-diagram-container-grid">
+              <!-- LEFT: INTERACTIVE ANATOMICAL HEART DIAGRAM -->
+              <div class="heart-diagram-panel glow-border-pink">
+                <div class="panel-header-mini">
+                  <span class="mini-title">Anatomical Auscultation Diagram</span>
+                  <span class="mini-hint">Hover or click a valve node to inspect</span>
+                </div>
+
+                <div class="heart-svg-wrapper" id="heart-svg-wrapper">
+                  <svg viewBox="0 0 400 360" class="heart-anatomical-svg" id="heart-anatomical-svg">
+                    <defs>
+                      <radialGradient id="heartGlowGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ff2e93" stop-opacity="0.35"/>
+                        <stop offset="60%" stop-color="#00f5a0" stop-opacity="0.12"/>
+                        <stop offset="100%" stop-color="#0a0f1d" stop-opacity="0"/>
+                      </radialGradient>
+                      <linearGradient id="aortaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff2e93"/>
+                        <stop offset="100%" stop-color="#db2777"/>
+                      </linearGradient>
+                      <linearGradient id="pulmonaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8"/>
+                        <stop offset="100%" stop-color="#0284c7"/>
+                      </linearGradient>
+                      <linearGradient id="cardiacBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#1e293b"/>
+                        <stop offset="50%" stop-color="#0f172a"/>
+                        <stop offset="100%" stop-color="#0b1120"/>
+                      </linearGradient>
+                      <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+                        <feMerge>
+                          <feMergeNode in="blur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    <!-- Background Ambience Glow -->
+                    <circle cx="200" cy="180" r="160" fill="url(#heartGlowGrad)" />
+
+                    <!-- Superior Vena Cava -->
+                    <path d="M125 40 L125 100 L145 100 L145 40 Z" fill="#0284c7" opacity="0.6" stroke="#38bdf8" stroke-width="1.5"/>
+                    
+                    <!-- Aortic Arch -->
+                    <path d="M155 90 C155 30, 235 30, 235 85 C235 110, 215 130, 195 135" fill="none" stroke="url(#aortaGrad)" stroke-width="22" stroke-linecap="round"/>
+                    <line x1="175" y1="48" x2="170" y2="25" stroke="#ff2e93" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="195" y1="42" x2="195" y2="22" stroke="#ff2e93" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="215" y1="48" x2="220" y2="25" stroke="#ff2e93" stroke-width="6" stroke-linecap="round"/>
+
+                    <!-- Pulmonary Trunk & Arteries -->
+                    <path d="M185 135 C185 100, 260 90, 280 80" fill="none" stroke="url(#pulmonaryGrad)" stroke-width="16" stroke-linecap="round"/>
+                    <path d="M185 135 C185 100, 110 95, 95 85" fill="none" stroke="url(#pulmonaryGrad)" stroke-width="14" stroke-linecap="round"/>
+
+                    <!-- Cardiac Chambers Silhouette -->
+                    <path d="M130 110 C80 140, 75 220, 120 265 C150 295, 185 330, 225 335 C275 340, 315 285, 320 215 C325 155, 275 115, 220 115 C195 115, 155 105, 130 110 Z" 
+                          fill="url(#cardiacBodyGrad)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"/>
+
+                    <!-- Septum lines -->
+                    <path d="M185 140 C175 200, 190 260, 225 335" fill="none" stroke="rgba(0, 245, 160, 0.35)" stroke-width="2" stroke-dasharray="4,4"/>
+                    <path d="M120 180 C160 190, 240 185, 305 180" fill="none" stroke="rgba(255, 46, 147, 0.25)" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+                    <!-- VALVE AUSCULTATION INTERACTIVE NODES -->
+                    <!-- 1. AV - Aortic Valve -->
+                    <g class="valve-node-group" id="node-AV" data-location="AV" transform="translate(145, 115)" role="button" tabindex="0" aria-label="Aortic Valve">
+                      <circle class="node-ripple" r="26" />
+                      <circle class="node-core" r="16" filter="url(#nodeGlow)" />
+                      <text class="node-code" text-anchor="middle" dy="4">AV</text>
+                      <g class="node-tag" transform="translate(0, -25)">
+                        <rect class="node-tag-bg" x="-45" y="-12" width="90" height="20" rx="10" />
+                        <text class="node-tag-text" id="node-tag-AV" text-anchor="middle" dy="2">AV • 23.7%</text>
+                      </g>
+                    </g>
+
+                    <!-- 2. PV - Pulmonary Valve -->
+                    <g class="valve-node-group" id="node-PV" data-location="PV" transform="translate(255, 115)" role="button" tabindex="0" aria-label="Pulmonary Valve">
+                      <circle class="node-ripple" r="26" />
+                      <circle class="node-core" r="16" filter="url(#nodeGlow)" />
+                      <text class="node-code" text-anchor="middle" dy="4">PV</text>
+                      <g class="node-tag" transform="translate(0, -25)">
+                        <rect class="node-tag-bg" x="-45" y="-12" width="90" height="20" rx="10" />
+                        <text class="node-tag-text" id="node-tag-PV" text-anchor="middle" dy="2">PV • 27.4%</text>
+                      </g>
+                    </g>
+
+                    <!-- 3. TV - Tricuspid Valve -->
+                    <g class="valve-node-group" id="node-TV" data-location="TV" transform="translate(155, 230)" role="button" tabindex="0" aria-label="Tricuspid Valve">
+                      <circle class="node-ripple" r="26" />
+                      <circle class="node-core" r="16" filter="url(#nodeGlow)" />
+                      <text class="node-code" text-anchor="middle" dy="4">TV</text>
+                      <g class="node-tag" transform="translate(0, 28)">
+                        <rect class="node-tag-bg" x="-45" y="-12" width="90" height="20" rx="10" />
+                        <text class="node-tag-text" id="node-tag-TV" text-anchor="middle" dy="2">TV • 22.5%</text>
+                      </g>
+                    </g>
+
+                    <!-- 4. MV - Mitral Valve -->
+                    <g class="valve-node-group" id="node-MV" data-location="MV" transform="translate(255, 245)" role="button" tabindex="0" aria-label="Mitral Valve">
+                      <circle class="node-ripple" r="26" />
+                      <circle class="node-core" r="16" filter="url(#nodeGlow)" />
+                      <text class="node-code" text-anchor="middle" dy="4">MV</text>
+                      <g class="node-tag" transform="translate(0, 28)">
+                        <rect class="node-tag-bg" x="-45" y="-12" width="90" height="20" rx="10" />
+                        <text class="node-tag-text" id="node-tag-MV" text-anchor="middle" dy="2">MV • 26.4%</text>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- RIGHT: LIVE BREAKDOWN & INSPECTION SUMMARY -->
+              <div class="heart-summary-panel">
+                <div class="summary-panel-header">
+                  <h4 class="summary-panel-title">Valve Contribution Ranking</h4>
+                  <span class="summary-panel-tag">Learned Masked Attention ($\alpha_i$)</span>
+                </div>
+
+                <div class="valve-ranking-list" id="valve-ranking-list">
+                  <!-- Dynamically populated rows for AV, MV, PV, TV -->
+                </div>
+
+                <!-- INTERACTIVE VALVE INSPECTION CARD -->
+                <div class="valve-inspect-card" id="valve-inspect-card">
+                  <div class="inspect-card-top">
+                    <div class="inspect-badge badge-mv" id="inspect-valve-badge">MV</div>
+                    <div class="inspect-title-group">
+                      <h4 class="inspect-valve-name" id="inspect-valve-name">Mitral Valve</h4>
+                      <span class="inspect-valve-site" id="inspect-valve-site">5th L. Intercostal Space (Apex)</span>
+                    </div>
+                    <span class="inspect-status-pill status-higher" id="inspect-status-pill">Higher Contribution</span>
+                  </div>
+                  <p class="inspect-explanation-text" id="inspect-explanation-text">The acoustic sound pattern recorded at this location contributed strongly to the multi-location neural classification.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 LOCATION CARDS ROW -->
+            <div class="location-cards-grid" id="location-cards-grid">
+              <!-- AV Card -->
+              <div class="location-card" id="loc-card-AV" data-location="AV" role="button" tabindex="0">
+                <div class="loc-card-top">
+                  <div class="loc-code-badge badge-av">AV</div>
+                  <div class="loc-meta">
+                    <h4 class="loc-name">Aortic Valve</h4>
+                    <span class="loc-sub">2nd R. Intercostal</span>
+                  </div>
+                </div>
+                <div class="loc-status-pill status-normal" id="loc-status-AV">Normal</div>
+                <div class="loc-meter-group">
+                  <div class="loc-meter-label">
+                    <span>Signal Contribution</span>
+                    <strong id="loc-pct-AV">23.71%</strong>
+                  </div>
+                  <div class="loc-meter-track">
+                    <div class="loc-meter-fill fill-av" id="loc-bar-AV" style="width: 23.71%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- MV Card -->
+              <div class="location-card" id="loc-card-MV" data-location="MV" role="button" tabindex="0">
+                <div class="loc-card-top">
+                  <div class="loc-code-badge badge-mv">MV</div>
+                  <div class="loc-meta">
+                    <h4 class="loc-name">Mitral Valve</h4>
+                    <span class="loc-sub">5th L. Intercostal (Apex)</span>
+                  </div>
+                </div>
+                <div class="loc-status-pill status-higher" id="loc-status-MV">Higher Contribution</div>
+                <div class="loc-meter-group">
+                  <div class="loc-meter-label">
+                    <span>Signal Contribution</span>
+                    <strong id="loc-pct-MV">26.39%</strong>
+                  </div>
+                  <div class="loc-meter-track">
+                    <div class="loc-meter-fill fill-mv" id="loc-bar-MV" style="width: 26.39%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PV Card -->
+              <div class="location-card" id="loc-card-PV" data-location="PV" role="button" tabindex="0">
+                <div class="loc-card-top">
+                  <div class="loc-code-badge badge-pv">PV</div>
+                  <div class="loc-meta">
+                    <h4 class="loc-name">Pulmonary Valve</h4>
+                    <span class="loc-sub">2nd L. Intercostal</span>
+                  </div>
+                </div>
+                <div class="loc-status-pill status-higher" id="loc-status-PV">Higher Contribution</div>
+                <div class="loc-meter-group">
+                  <div class="loc-meter-label">
+                    <span>Signal Contribution</span>
+                    <strong id="loc-pct-PV">27.38%</strong>
+                  </div>
+                  <div class="loc-meter-track">
+                    <div class="loc-meter-fill fill-pv" id="loc-bar-PV" style="width: 27.38%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TV Card -->
+              <div class="location-card" id="loc-card-TV" data-location="TV" role="button" tabindex="0">
+                <div class="loc-card-top">
+                  <div class="loc-code-badge badge-tv">TV</div>
+                  <div class="loc-meta">
+                    <h4 class="loc-name">Tricuspid Valve</h4>
+                    <span class="loc-sub">4th L. Sternal Border</span>
+                  </div>
+                </div>
+                <div class="loc-status-pill status-moderate" id="loc-status-TV">Moderate Contribution</div>
+                <div class="loc-meter-group">
+                  <div class="loc-meter-label">
+                    <span>Signal Contribution</span>
+                    <strong id="loc-pct-TV">22.51%</strong>
+                  </div>
+                  <div class="loc-meter-track">
+                    <div class="loc-meter-fill fill-tv" id="loc-bar-TV" style="width: 22.51%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PATIENT-FRIENDLY EXPLANATION BOX -->
+            <div class="location-patient-explanation">
+              <div class="expl-title-row">
+                <span class="expl-icon">💡</span>
+                <h4 class="expl-heading">What does this attention distribution mean?</h4>
+              </div>
+              <p class="expl-paragraph">
+                The attention mechanism assigns relative importance weights ($\alpha_i$) to active recording locations during neural fusion. A higher percentage indicates that acoustic temporal-spectral patterns at that site were weighted more heavily in the multi-location classifier.
+              </p>
+            </div>
+
+            <div class="location-clinical-disclaimer">
+              <span class="disclaimer-icon">🩺</span>
+              <span class="disclaimer-text">
+                <strong>AI Support:</strong> Multi-location attention indicates algorithm feature weighting and does not confirm isolated anatomical valve pathologies.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 9: 📈 PATIENT TRACKING (DEDICATED LONGITUDINAL TRACKING)
+             ==================================================================== -->
+        <section id="view-tracking" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="tracking-empty-state">
+            <div class="empty-state-icon">📈</div>
+            <h3 class="empty-state-title">No Patient Tracking History Available</h3>
+            <p class="empty-state-desc">Perform an analysis or load the CirCor demo to track longitudinal acoustic changes across recorded visits.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="patient-tracking-section premium-card wide-card" id="patient-tracking-section">
+            <div class="section-header-row">
+              <div class="section-title-group">
+                <div class="section-tag-badge tag-teal-badge">
+                  <span class="tag-heart-icon">📈</span>
+                  <span>Patient Heart-Sound Tracking</span>
+                </div>
+                <h3 class="section-main-heading">Longitudinal Acoustic Measurement Tracking</h3>
+                <p class="section-sub-heading">Tracks variations in AI-generated acoustic confidence and model outputs across recorded visits for this patient over time.</p>
+              </div>
+              <div class="header-actions-group">
+                <button class="btn btn-primary-neon btn-download-report" onclick="downloadPatientReport();" title="Download Official Patient PDF Report">
+                  <span>📄 Download Patient Report</span>
+                </button>
+                <div class="tracking-patient-chip" id="tracking-patient-chip">
+                  <span class="chip-label">Patient ID:</span>
+                  <strong class="chip-val" id="track-patient-id-label">40840</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- TRACKING STATS SUMMARY ROW -->
+            <div class="tracking-summary-grid" id="tracking-summary-grid">
+              <!-- CARD 1: LATEST VISIT -->
+              <div class="track-summary-card card-latest">
+                <div class="track-card-header">
+                  <span class="track-card-label">Latest Visit (Current)</span>
+                  <span class="track-visit-badge" id="track-latest-visit-tag">Visit 3</span>
+                </div>
+                <div class="track-card-body">
+                  <div class="track-metric-val" id="track-latest-val">52.75%</div>
+                  <div class="track-metric-sub">
+                    <span id="track-latest-pred" class="pred-tag tag-present">Murmur Present</span>
+                    <span id="track-latest-date" class="date-tag">Sep 6, 2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 2: PREVIOUS VISIT -->
+              <div class="track-summary-card card-prev">
+                <div class="track-card-header">
+                  <span class="track-card-label">Previous Visit</span>
+                  <span class="track-visit-badge" id="track-prev-visit-tag">Visit 2</span>
+                </div>
+                <div class="track-card-body">
+                  <div class="track-metric-val" id="track-prev-val">49.80%</div>
+                  <div class="track-metric-sub">
+                    <span id="track-prev-pred" class="pred-tag tag-present">Murmur Present</span>
+                    <span id="track-prev-date" class="date-tag">Aug 28, 2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 3: MEASUREMENT CHANGE -->
+              <div class="track-summary-card card-change">
+                <div class="track-card-header">
+                  <span class="track-card-label">AI Measurement Change</span>
+                  <span class="track-delta-pill" id="track-delta-pill">+2.95 pp</span>
+                </div>
+                <div class="track-card-body">
+                  <div class="track-metric-val change-val" id="track-change-val">+2.95 pp</div>
+                  <div class="track-metric-sub">
+                    <span class="sub-label">Change from previous visit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 4: TREND TRAJECTORY -->
+              <div class="track-summary-card card-trend">
+                <div class="track-card-header">
+                  <span class="track-card-label">Acoustic Trajectory</span>
+                  <span class="track-trend-symbol" id="track-trend-symbol">↑</span>
+                </div>
+                <div class="track-card-body">
+                  <div class="track-metric-val trend-val" id="track-trend-label">Increasing</div>
+                  <div class="track-metric-sub">
+                    <span class="sub-label">Mathematical model trend</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SINGLE VISIT CALLOUT -->
+            <div class="tracking-single-notice hidden" id="tracking-single-notice">
+              <div class="notice-icon">📈</div>
+              <div class="notice-content">
+                <h4 class="notice-title">Baseline Analysis Recorded</h4>
+                <p class="notice-desc">Only one analysis is currently available for this patient. Complete another analysis for this patient in a subsequent session to begin tracking changes over time.</p>
+              </div>
+            </div>
+
+            <!-- TREND GRAPH PANEL -->
+            <div class="trend-chart-panel glow-border-teal" id="trend-chart-panel">
+              <div class="chart-header-row">
+                <div class="chart-title-group">
+                  <h4 class="chart-heading">AI Acoustic Indicator Over Time (%)</h4>
+                  <span class="chart-subheading">Plots the neural network confidence score across consecutive recorded sessions.</span>
+                </div>
+                <div class="chart-legend">
+                  <span class="legend-dot dot-pink"></span>
+                  <span class="legend-text">AI Confidence Score</span>
+                </div>
+              </div>
+
+              <!-- SVG RESPONSIVE LINE CHART -->
+              <div class="trend-svg-container" id="trend-svg-container">
+                <svg viewBox="0 0 760 260" class="trend-line-chart-svg" id="trend-line-chart-svg">
+                  <defs>
+                    <linearGradient id="trendLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#00f5a0" />
+                      <stop offset="50%" stop-color="#38bdf8" />
+                      <stop offset="100%" stop-color="#ff2e93" />
+                    </linearGradient>
+                    <linearGradient id="trendAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ff2e93" stop-opacity="0.35" />
+                      <stop offset="60%" stop-color="#00f5a0" stop-opacity="0.1" />
+                      <stop offset="100%" stop-color="#00f5a0" stop-opacity="0" />
+                    </linearGradient>
+                    <filter id="pointGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <g id="chart-grid-group"></g>
+                  <g id="chart-area-group"></g>
+                  <g id="chart-path-group"></g>
+                  <g id="chart-points-group"></g>
+                  <g id="chart-labels-group"></g>
+                </svg>
+
+                <div class="trend-tooltip hidden" id="trend-tooltip">
+                  <div class="tooltip-header" id="tt-visit">Visit 1</div>
+                  <div class="tooltip-date" id="tt-date">Aug 15, 2026</div>
+                  <div class="tooltip-row">
+                    <span class="tt-label">AI Confidence:</span>
+                    <strong class="tt-val" id="tt-conf">45.20%</strong>
+                  </div>
+                  <div class="tooltip-row">
+                    <span class="tt-label">Prediction:</span>
+                    <span class="tt-pred" id="tt-pred">Murmur Present</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-footer-note" id="track-interpretation-text">
+                The AI acoustic indicator has changed across the recorded visits. Changes in the AI measurement reflect acoustic pattern variations and do not indicate clinical disease progression.
+              </div>
+            </div>
+
+            <!-- VISIT HISTORY TABLE -->
+            <div class="visit-history-panel" id="visit-history-panel">
+              <div class="history-panel-header">
+                <h4 class="history-panel-title">Visit History Log</h4>
+                <span class="history-count-pill" id="history-total-pill">3 Visits Recorded</span>
+              </div>
+
+              <div class="history-table-wrapper">
+                <table class="history-table" id="tracking-history-table">
+                  <thead>
+                    <tr>
+                      <th>Visit #</th>
+                      <th>Date & Time</th>
+                      <th>Murmur Prediction</th>
+                      <th>AI Confidence</th>
+                      <th>Clinical Outcome</th>
+                      <th>Location Attention Focus</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tracking-history-tbody">
+                    <!-- Dynamically rendered rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="location-patient-explanation" style="margin-top: 1.5rem;">
+              <div class="expl-title-row">
+                <span class="expl-icon">💡</span>
+                <h4 class="expl-heading">Understanding Longitudinal Acoustic Tracking</h4>
+              </div>
+              <p class="expl-paragraph">
+                This tracking dashboard records acoustic measurement shifts over time. Fluctuations in confidence scores represent acoustic variations in auscultation recordings and must be evaluated alongside clinical cardiology assessment.
+              </p>
+            </div>
+
+            <div class="location-clinical-disclaimer">
+              <span class="disclaimer-icon">🩺</span>
+              <span class="disclaimer-text">
+                <strong>AI Support:</strong> Longitudinal tracking is intended for educational and clinical-support purposes and does not establish disease progression or severity.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 10: 🧬 HEART-SOUND FINGERPRINT (DEDICATED FINGERPRINT PAGE)
+             ==================================================================== -->
+        <section id="view-fingerprint" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="fingerprint-empty-state">
+            <div class="empty-state-icon">🧬</div>
+            <h3 class="empty-state-title">No Fingerprint Generated</h3>
+            <p class="empty-state-desc">Upload audio recordings or run the CirCor demo to generate a compact 1,264-D Heart-Sound Fingerprint V2.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="flow-card premium-card wide-card" id="fingerprint-content-panel">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">Heart-Sound Fingerprint V2</h2>
+                <p class="card-subheading">A compact, deterministic 1,264-dimensional temporal-aware mathematical representation of heart sound acoustics.</p>
+              </div>
+              <div class="fp-badge">Version 2.0 (1,264-D)</div>
+            </div>
+
+            <!-- FINGERPRINT V2 STATUS CARD -->
+            <div class="fingerprint-status-card glow-border-cyan" id="fingerprint-status-card">
+              <div class="fp-card-header">
+                <div class="fp-icon-wrap">🧬</div>
+                <div class="fp-header-info">
+                  <span class="fp-tag">HEART-SOUND FINGERPRINT V2</span>
+                  <h4 class="fp-status-text" id="fp-status-text">Generated ✓</h4>
+                </div>
+                <div class="fp-badge" id="fp-version-badge">Deterministic Acoustic Hash</div>
+              </div>
+
+              <div class="fp-details-grid">
+                <div class="fp-detail-item">
+                  <span class="fp-detail-label">Fingerprint Identifier</span>
+                  <div class="fp-id-row">
+                    <code class="fp-id-code" id="fp-id-display">HS-A7F3D92C</code>
+                    <button type="button" class="btn-copy-sm" id="btn-copy-fpid" title="Copy Fingerprint ID">📋 Copy</button>
+                  </div>
+                </div>
+
+                <div class="fp-detail-item">
+                  <span class="fp-detail-label">Reference Corpus Status</span>
+                  <span class="fp-detail-val val-cyan" id="fp-ref-library-val">Active (20 reference subjects)</span>
+                </div>
+
+                <div class="fp-detail-item">
+                  <span class="fp-detail-label">Total Feature Dimension</span>
+                  <span class="fp-detail-val val-green" id="fp-total-dims-val">1,264 Dimensions</span>
+                </div>
+
+                <div class="fp-detail-item">
+                  <span class="fp-detail-label">Acoustic Embedding Breakdown</span>
+                  <span class="fp-detail-val" id="fp-dims-val">MFCC (240) + Mel (256) + AST (768)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3-TIER EMBEDDING VECTOR ARCHITECTURE -->
+            <div class="fp-architecture-grid">
+              <div class="fp-arch-card">
+                <div class="fp-arch-icon">🎵</div>
+                <h4 class="fp-arch-title">MFCC Dynamics (240-D)</h4>
+                <p class="fp-arch-desc">Multi-location statistical cepstral envelopes capturing valve closure acoustic sharpness and timbre.</p>
+              </div>
+
+              <div class="fp-arch-card">
+                <div class="fp-arch-icon">📊</div>
+                <h4 class="fp-arch-title">Log-Mel Energy (256-D)</h4>
+                <p class="fp-arch-desc">Triangular mel-scale spectral energy distributions reflecting turbulent murmur high-frequency components.</p>
+              </div>
+
+              <div class="fp-arch-card">
+                <div class="fp-arch-icon">🧠</div>
+                <h4 class="fp-arch-title">Audio Spectrogram Transformer (768-D)</h4>
+                <p class="fp-arch-desc">Deep self-attention acoustic representations capturing complex temporal phonocardiographic rhythm patterns.</p>
+              </div>
+            </div>
+
+            <!-- FINGERPRINT TECHNICAL SPECIFICATION BOX -->
+            <div class="location-patient-explanation" style="margin-top: 1.5rem;">
+              <div class="expl-title-row">
+                <span class="expl-icon">💡</span>
+                <h4 class="expl-heading">What does the Fingerprint represent?</h4>
+              </div>
+              <p class="expl-paragraph">
+                The Heart-Sound Fingerprint is a deterministic numeric vector summarizing the spectral geometry, harmonic structure, and temporal envelope of all available auscultation recordings. It serves as a mathematical acoustic identity for similarity comparisons and longitudinal tracking.
+              </p>
+            </div>
+
+            <div class="results-actions-bar space-between" style="margin-top: 1.5rem;">
+              <button class="btn btn-secondary-teal" onclick="document.getElementById('nav-similarity').click();">
+                <span>🔎 Run Acoustic Similarity Search →</span>
+              </button>
+              <button class="btn btn-primary-neon" onclick="document.getElementById('nav-analysis').click();">
+                <span>🫀 View Analysis Dashboard</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 11: 🔎 ACOUSTIC SIMILARITY (DEDICATED SIMILARITY SEARCH PAGE)
+             ==================================================================== -->
+        <section id="view-similarity" class="view-section">
+          <!-- EMPTY STATE NOTICE -->
+          <div class="view-empty-state hidden" id="similarity-page-empty-state">
+            <div class="empty-state-icon">🔎</div>
+            <h3 class="empty-state-title">No Acoustic Similarity Data Available</h3>
+            <p class="empty-state-desc">Analyze recordings or load the CirCor demo to search for the most acoustically similar reference recordings.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-primary-neon btn-small" onclick="document.getElementById('nav-new-analysis').click();">Start New Analysis</button>
+              <button class="btn btn-secondary-teal btn-small" onclick="document.getElementById('btn-hero-demo').click();">Try Demo (Patient 40840)</button>
+            </div>
+          </div>
+
+          <div class="patient-tracking-section premium-card wide-card" id="acoustic-similarity-section">
+            <div class="location-header-row">
+              <div class="location-title-group">
+                <div class="location-badge-tag">
+                  <span class="loc-badge-icon">🔎</span>
+                  <span>Acoustic Similarity Search</span>
+                </div>
+                <h3 class="location-main-title">Reference Heart Sound Matching</h3>
+                <p class="location-subtitle">
+                  Compare this heart sound with acoustically similar reference recordings in the CirCor DigiScope database using normalized cosine vector similarity.
+                </p>
+              </div>
+            </div>
+
+            <!-- TOP 5 ACOUSTIC SIMILARITY RESULTS -->
+            <div class="similarity-results-panel" id="similarity-results-panel" style="margin-top: 1.5rem;">
+              <div class="similarity-panel-header">
+                <h4 class="similarity-panel-title">Top 5 Acoustically Similar Reference Recordings</h4>
+                <span class="similarity-note-pill">Ranked by Exact Normalized Cosine Similarity</span>
+              </div>
+
+              <div class="similarity-cards-list" id="similarity-cards-list">
+                <!-- Dynamically populated via app.js -->
+              </div>
+            </div>
+
+            <!-- EMPTY / FALLBACK NOTICE -->
+            <div class="tracking-single-notice hidden" id="similarity-empty-notice">
+              <span class="notice-icon">🔎</span>
+              <div class="notice-text-content">
+                <h5 class="notice-title">No Reference Matches Available</h5>
+                <p class="notice-desc" id="similarity-empty-desc">
+                  No reference recordings are currently available for acoustic similarity search.
+                </p>
+              </div>
+            </div>
+
+            <!-- PATIENT-FRIENDLY EXPLANATION BOX -->
+            <div class="location-patient-explanation" style="margin-top: 1.5rem;">
+              <div class="expl-title-row">
+                <span class="expl-icon">💡</span>
+                <h4 class="expl-heading">Understanding Acoustic Similarity</h4>
+              </div>
+              <p class="expl-paragraph">
+                The similarity score measures how closely the spectral envelope, temporal rhythm, and acoustic timbre of this recording match reference recordings in the dataset. A high similarity score reflects mathematical waveform alignment and does not imply identical disease pathology or clinical diagnosis.
+              </p>
+            </div>
+
+            <!-- CLINICAL SUPPORT DISCLAIMER -->
+            <div class="location-clinical-disclaimer">
+              <span class="disclaimer-icon">⚠️</span>
+              <span class="disclaimer-text">
+                <strong>Acoustic similarity only:</strong> This result evaluates mathematical feature distance and does not indicate medical similarity, shared disease pathology, or a clinical diagnosis.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 12: 🤖 ASK LUBDUB AI (DEDICATED CHATBOT PAGE)
+             ==================================================================== -->
+        <section id="view-chatbot" class="view-section">
+          <div class="chatbot-page-card premium-card wide-card glow-border-teal" id="chatbot-page-container">
+            <div class="chatbot-page-header">
+              <div class="chatbot-header-left">
+                <div class="chatbot-page-avatar">🤖</div>
+                <div class="chatbot-page-titles">
+                  <h2 class="chatbot-page-title">Ask LubDub AI</h2>
+                  <p class="chatbot-page-subtitle">Your Personal Heart Sound Assistant • Ask questions about your heart sound screening result.</p>
+                </div>
+              </div>
+
+              <div class="chatbot-header-actions">
+                <button class="btn btn-secondary-teal btn-small" id="btn-chat-reset" title="Start a fresh conversation session">
+                  <span>↺ New Chat</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- RESULT CONTEXT INDICATOR BANNER -->
+            <div class="chatbot-context-banner" id="chat-context-banner">
+              <span class="ctx-icon">📊</span>
+              <span class="ctx-text" id="chat-ctx-text">No analysis available yet. You can still ask general questions about heart sounds.</span>
+            </div>
+
+            <!-- SUGGESTED QUESTIONS CHIPS SECTION -->
+            <div class="chatbot-suggestions-section">
+              <span class="suggestions-label">Suggested Questions:</span>
+              <div class="suggestion-pills-list" id="chat-suggestion-pills">
+                <button class="chat-pill" data-prompt="What does my result mean?">What does my result mean?</button>
+                <button class="chat-pill" data-prompt="What does my confidence mean?">What does confidence mean?</button>
+                <button class="chat-pill" data-prompt="Why was my result classified this way?">Why was my result classified this way?</button>
+                <button class="chat-pill" data-prompt="What should I do next?">What should I do next?</button>
+                <button class="chat-pill" data-prompt="Can this result diagnose my heart condition?">Can this result diagnose my heart condition?</button>
+              </div>
+            </div>
+
+            <!-- CHAT MESSAGES STREAM -->
+            <div class="chatbot-page-messages-stream" id="chat-messages-stream">
+              <div class="chat-bubble bubble-assistant">
+                <div class="bubble-avatar">🤖</div>
+                <div class="bubble-content">
+                  <p>👋 Hi! I'm <strong>LubDub AI</strong>, your personal heart sound screening assistant.</p>
+                  <p>I can help explain your heart sound results, what confidence scores mean, and answer general questions about heart sounds. Feel free to click any suggested question above or type your question below!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CHAT INPUT COMPONENT -->
+            <form class="chatbot-page-input-form" id="chat-input-form">
+              <input 
+                type="text" 
+                id="chat-input-text" 
+                class="chat-input-field" 
+                placeholder="Ask LubDub AI about your result..." 
+                autocomplete="off"
+              >
+              <button type="submit" id="btn-chat-send" class="btn btn-primary-neon btn-chat-send" aria-label="Send message">
+                <span>Send ➤</span>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 13: 📜 HISTORY (LOCAL STORAGE SESSION ARCHIVE)
+             ==================================================================== -->
+        <section id="view-history" class="view-section">
+          <div class="flow-card premium-card wide-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">Analysis History</h2>
+                <p class="card-subheading">Recent heart sound analysis sessions performed in this browser.</p>
+              </div>
+              <button id="btn-clear-history" class="btn-clear-link">Clear History</button>
+            </div>
+
+            <div class="history-list-container" id="history-container">
+              <div class="empty-history-notice">
+                <span class="empty-icon">📂</span>
+                <p>No previous test sessions recorded yet.</p>
+                <button class="btn btn-secondary-teal btn-small" id="btn-history-start">Run First Analysis</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: 🩺 INTEGRATED RESULT (CONSOLIDATED LUBDUB + HFrEF & SPECIALIST)
+             ==================================================================== -->
+        <section id="view-integrated" class="view-section">
+          <div class="flow-card premium-card wide-card">
+            <!-- Header Row -->
+            <div class="card-header-row" style="flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+              <div class="card-title-group">
+                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.25rem;">
+                  <span class="badge-pill badge-pill-cyan">Integrated View</span>
+                  <span class="badge-pill badge-pill-outline">Dual Architecture</span>
+                </div>
+                <h2 class="card-heading">Integrated Multi-Modal Heart Sound & ECG Analysis</h2>
+                <p class="card-subheading">Consolidated view of existing LubDub PCG analysis alongside new HFrEF ECG + multi-location PCG screening</p>
+              </div>
+              <div class="integrated-actions-group" style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary-teal" id="btn-integrated-demo" style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span>⚡</span> Run Integrated Demo
+                </button>
+                <button type="button" class="btn btn-secondary-teal" id="btn-integrated-pdf" style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span>📄</span> Download Report
+                </button>
+                <div class="hfref-selector-wrapper" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.04); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                  <span style="font-size: 0.82rem; color: #94a3b8;">HFrEF Subject:</span>
+                  <select id="select-hfref-subject" style="background: #0f172a; color: #f1f5f9; border: 1px solid #334155; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.85rem;">
+                    <option value="demo_default">Demo Subject (Default)</option>
+                  </select>
+                  <button type="button" class="btn btn-small btn-primary-pink" id="btn-analyze-hfref">Analyze</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Patient Info & Modality Banner -->
+            <div class="integrated-meta-banner" style="display: flex; justify-content: space-between; align-items: center; background: rgba(30, 41, 59, 0.6); padding: 0.85rem 1.25rem; border-radius: 10px; margin: 1.25rem 0; border: 1px solid rgba(148, 163, 184, 0.15); flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <div>
+                  <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; display: block;">LubDub Subject</span>
+                  <strong style="color: #f1f5f9; font-size: 1rem;" id="integrated-lubdub-pid">CirCor Test Patient 40840</strong>
+                </div>
+                <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+                  <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; display: block;">HFrEF Subject</span>
+                  <strong style="color: #38bdf8; font-size: 1rem;" id="integrated-hfref-pid">Tongji HFrEF Cohort</strong>
+                </div>
+                <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+                  <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; display: block;">Data Isolation</span>
+                  <span style="color: #10b981; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                    <span style="width: 7px; height: 7px; background: #10b981; border-radius: 50%;"></span>
+                    Independent Non-Merged Datasets
+                  </span>
+                </div>
+              </div>
+              <div>
+                <span id="integrated-timestamp" style="font-size: 0.8rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">Ready for Consolidated Evaluation</span>
+              </div>
+            </div>
+
+            <!-- TOP SPECIALIST RECOMMENDATION BANNER -->
+            <div class="specialist-recommendation-card" id="integrated-specialist-card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid #38bdf8; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.15);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="font-size: 2rem; background: rgba(56, 189, 248, 0.15); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 10px;">🩺</span>
+                  <div>
+                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #38bdf8; font-weight: 600;">Specialist Recommendation</span>
+                    <h3 id="integrated-specialist-title" style="margin: 0; color: #f8fafc; font-size: 1.4rem;">Cardiologist / Valvular Specialist</h3>
+                  </div>
+                </div>
+                <div id="integrated-urgency-badge" class="badge-pill badge-pill-warning" style="font-size: 0.85rem; padding: 0.35rem 0.85rem;">
+                  Cardiology Auscultation Review
+                </div>
+              </div>
+
+              <!-- DEMO / NOTICE BANNER -->
+              <div id="integrated-demo-banner" class="hidden" style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; color: #fbbf24; font-weight: 600; font-size: 0.88rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span>⚠️</span>
+                <span>DEMO / UI WORKFLOW ONLY — NOT A REAL HFrEF PREDICTION</span>
+              </div>
+
+              <p id="integrated-recommendation-text" style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                Based on the available acoustic analysis, further evaluation by a cardiologist is recommended. Significant murmur patterns were identified across auscultation valve sites. HFrEF analysis is pending because the required dataset/model is not currently available.
+              </p>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 1rem;">
+                <h5 style="margin: 0 0 0.5rem 0; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Suggested Diagnostic Next Steps:</h5>
+                <ul id="integrated-investigations-list" style="margin: 0; padding-left: 1.25rem; color: #e2e8f0; font-size: 0.9rem; line-height: 1.6;">
+                  <li>Comprehensive cardiac auscultation and Doppler echocardiography</li>
+                  <li>Auscultation site focal localization review</li>
+                  <li>Clinical evaluation by a certified medical practitioner</li>
+                </ul>
+              </div>
+
+              <div style="font-size: 0.78rem; color: #64748b; line-height: 1.4; display: flex; align-items: center; gap: 0.5rem;">
+                <span>ℹ️</span>
+                <span id="integrated-disclaimer"><strong>Research prototype — not a clinical diagnostic system. Findings must be evaluated by a certified medical practitioner.</strong></span>
+              </div>
+            </div>
+
+            <!-- DUAL ARCHITECTURE COMPARISON GRID -->
+            <div class="integrated-dual-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem;">
+              
+              <!-- LEFT COLUMN: EXISTING LUBDUB RESULT -->
+              <div class="integrated-column-card" style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 46, 147, 0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
+                  <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <span style="font-size: 1.3rem;">🫀</span>
+                    <div>
+                      <h4 style="margin: 0; color: #ff2e93; font-size: 1.1rem;">Existing LubDub Patient Result</h4>
+                      <span style="font-size: 0.75rem; color: #94a3b8;">CirCor PCG Multi-Location Attention Net</span>
+                    </div>
+                  </div>
+                  <span class="badge-pill badge-pill-pink" id="integrated-murmur-tag">Murmur Detected</span>
+                </div>
+
+                <!-- Murmur & Outcome Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                  <div style="background: rgba(255, 46, 147, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255, 46, 147, 0.15);">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Murmur Detection</span>
+                    <strong id="integrated-murmur-val" style="color: #ff2e93; font-size: 1.2rem;">Present (52.8%)</strong>
+                    <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-top: 0.5rem; overflow: hidden;">
+                      <div id="integrated-murmur-bar" style="background: #ff2e93; width: 52.8%; height: 100%;"></div>
+                    </div>
+                  </div>
+
+                  <div style="background: rgba(0, 245, 160, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0, 245, 160, 0.15);">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Clinical Outcome</span>
+                    <strong id="integrated-outcome-val" style="color: #00f5a0; font-size: 1.2rem;">Abnormal (51.8%)</strong>
+                    <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-top: 0.5rem; overflow: hidden;">
+                      <div id="integrated-outcome-bar" style="background: #00f5a0; width: 51.8%; height: 100%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Location Attention Breakdown -->
+                <div style="margin-bottom: 1.25rem;">
+                  <h5 style="margin: 0 0 0.6rem 0; font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Multi-Location Attention Distribution:</h5>
+                  <div id="integrated-attention-bars" style="display: flex; flex-direction: column; gap: 0.45rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #cbd5e1;">
+                      <span>Mitral (MV / Apex): <strong id="int-attn-mv">26.4%</strong></span>
+                      <span>Pulmonary (PV): <strong id="int-attn-pv">27.4%</strong></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #cbd5e1;">
+                      <span>Aortic (AV): <strong id="int-attn-av">23.7%</strong></span>
+                      <span>Tricuspid (TV): <strong id="int-attn-tv">22.5%</strong></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Acoustic Fingerprint & Similarity -->
+                <div style="background: rgba(30, 41, 59, 0.5); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                    <span style="font-size: 0.78rem; color: #94a3b8;">Acoustic Fingerprint V2:</span>
+                    <span id="integrated-fp-id" style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #38bdf8;">HS-40840-v2</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.78rem; color: #94a3b8;">Closest CirCor Match:</span>
+                    <span id="integrated-similarity-match" style="font-size: 0.82rem; color: #00f5a0;">REF-00482 (98.2% Similarity)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT COLUMN: NEW ECG-PCG RESULT -->
+              <div class="integrated-column-card" style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
+                  <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <span style="font-size: 1.3rem;">⚡</span>
+                    <div>
+                      <h4 style="margin: 0; color: #38bdf8; font-size: 1.1rem;">New ECG + PCG Feature</h4>
+                      <span style="font-size: 0.75rem; color: #94a3b8;">HFrEF EKO DUO Synchronized Fusion Net</span>
+                    </div>
+                  </div>
+                  <span class="badge-pill badge-pill-warning" id="integrated-hfref-tag">HFrEF Dataset: Not Available</span>
+                </div>
+
+                <!-- HFrEF / LVEF Finding Row -->
+                <div style="background: rgba(56, 189, 248, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.15); margin-bottom: 1.25rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Ventricular Ejection Fraction (LVEF)</span>
+                      <strong id="integrated-hfref-status-val" style="color: #f59e0b; font-size: 1.15rem;">HFrEF Analysis: Pending Dataset</strong>
+                    </div>
+                    <div style="text-align: right;">
+                      <span style="font-size: 0.75rem; color: #94a3b8; display: block;">HFrEF Probability</span>
+                      <strong id="integrated-hfref-prob-val" style="color: #94a3b8; font-size: 0.95rem;">No clinical prediction generated</strong>
+                    </div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-top: 0.6rem; overflow: hidden;">
+                    <div id="integrated-hfref-bar" style="background: #f59e0b; width: 0%; height: 100%;"></div>
+                  </div>
+                </div>
+
+                <!-- Synchronized ECG Metrics -->
+                <div style="margin-bottom: 1.25rem; background: rgba(30, 41, 59, 0.4); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h5 style="margin: 0; font-size: 0.82rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em;">ECG Rhythm &amp; HRV Metrics:</h5>
+                    <span id="integrated-ecg-active-badge" class="badge-pill badge-pill-outline" style="font-size: 0.7rem; color: #f59e0b; border-color: #f59e0b;">Dataset Pending</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.82rem; color: #cbd5e1;">
+                    <div>Heart Rate: <strong id="int-ecg-hr" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>R-R Interval Mean: <strong id="int-ecg-rr" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>SDNN (HRV): <strong id="int-ecg-sdnn" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>RMSSD: <strong id="int-ecg-rmssd" style="color: #94a3b8;">Pending Dataset</strong></div>
+                  </div>
+                </div>
+
+                <!-- 4-Valve PCG Acoustic Features -->
+                <div style="background: rgba(30, 41, 59, 0.4); padding: 0.9rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                  <h5 style="margin: 0 0 0.5rem 0; font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">4-Site Acoustic Valve Features:</h5>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem; color: #cbd5e1;">
+                    <div>Aortic (RUSB): <strong id="int-pcg-rusb" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>Pulmonary (LUSB): <strong id="int-pcg-lusb" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>Tricuspid (LLSB): <strong id="int-pcg-llsb" style="color: #94a3b8;">Pending Dataset</strong></div>
+                    <div>Mitral (APEX): <strong id="int-pcg-apex" style="color: #94a3b8;">Pending Dataset</strong></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Architecture & Dataset Integrity Notice Card -->
+            <div style="margin-top: 1.5rem; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.25rem;">
+              <h5 style="margin: 0 0 0.4rem 0; color: #f8fafc; font-size: 0.9rem;">Dataset Architecture &amp; System Integrity</h5>
+              <p style="margin: 0; font-size: 0.82rem; color: #94a3b8; line-height: 1.5;">
+                LubDub Murmur maintains strict physical and algorithmic separation between datasets. 
+                The <strong>CirCor DigiScope dataset</strong> powers heart murmur classification, clinical outcome prediction, and acoustic fingerprint similarity search. 
+                The <strong>HFrEF EKO DUO dataset</strong> (Zenodo 16934966) powers multimodal electrocardiogram and 4-valve phonocardiogram systolic function screening. 
+                Patient identifiers are never conflated or merged.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 14: ℹ️ ABOUT (SYSTEM SPECIFICATIONS)
+             ==================================================================== -->
+        <section id="view-about" class="view-section">
+          <div class="flow-card premium-card wide-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <h2 class="card-heading">About LubDub Murmur</h2>
+                <p class="card-subheading">Heart Sound Analysis System & PhysioNet CirCor DigiScope Architecture</p>
+              </div>
+            </div>
+
+            <div class="about-content-grid">
+              <div class="about-card">
+                <div class="about-icon">🫀</div>
+                <h3 class="about-title">Multi-Location Auscultation</h3>
+                <p class="about-text">Processes standardized multi-channel acoustic phonocardiogram signals across five anatomical valve sites (Aortic, Mitral, Pulmonary, Tricuspid, and Other).</p>
+              </div>
+
+              <div class="about-card">
+                <div class="about-icon">🧠</div>
+                <h3 class="about-title">Masked Attention Fusion</h3>
+                <p class="about-text">Features a shared 2D CNN encoder and masked scaled dot-product attention fusion, dynamically handling missing cardiac locations with zero patient data leakage.</p>
+              </div>
+
+              <div class="about-card">
+                <div class="about-icon">🎯</div>
+                <h3 class="about-title">Multi-Task Diagnostics</h3>
+                <p class="about-text">Dual prediction heads simultaneously evaluate Heart Murmur presence and overall Clinical Outcome based on acoustic spectral-temporal representations.</p>
+              </div>
+
+              <div class="about-card">
+                <div class="about-icon">🧬</div>
+                <h3 class="about-title">Fingerprint V2 & Similarity</h3>
+                <p class="about-text">Derives deterministic 1,264-dimensional acoustic fingerprints (MFCC + Mel + AST embeddings) to compute exact cosine similarity against reference cohorts.</p>
+              </div>
+            </div>
+
+            <div class="medical-disclaimer-card" style="margin-top: 2rem;">
+              <span class="disclaimer-icon">⚠️</span>
+              <span class="disclaimer-body"><strong>Medical Disclaimer:</strong> LubDub Murmur is developed for research, education, and algorithmic benchmarking on the PhysioNet CirCor DigiScope PCG dataset. Model predictions represent probabilistic classifications of phonocardiographic acoustic signals and do not constitute a definitive clinical diagnosis.</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL: MATCH INSPECTION DETAILS (GLOBAL MODAL) -->
+  <div class="match-modal-overlay hidden" id="match-modal-overlay">
+    <div class="match-modal-card glow-border-cyan">
+      <div class="match-modal-header">
+        <div class="match-modal-title-group">
+          <span class="modal-tag">REFERENCE RECORDING INSPECTION</span>
+          <h3 class="modal-title" id="modal-match-id">REF-00482</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-match-modal">&times;</button>
+      </div>
+
+      <div class="match-modal-body">
+        <div class="modal-sim-badge-row">
+          <div class="modal-sim-stat">
+            <span class="modal-stat-label">Acoustic Similarity</span>
+            <strong class="modal-stat-value val-cyan" id="modal-match-percent">98.2%</strong>
+          </div>
+          <div class="modal-sim-stat">
+            <span class="modal-stat-label">Cosine Score</span>
+            <span class="modal-stat-value" id="modal-match-score">0.9821</span>
+          </div>
+          <div class="modal-sim-stat">
+            <span class="modal-stat-label">Reference Cohort</span>
+            <span class="modal-stat-value" id="modal-match-split">CirCor Train Split</span>
+          </div>
+        </div>
+
+        <div class="modal-components-box">
+          <h5 class="modal-box-heading">Compared Feature Sub-Components</h5>
+          <div class="modal-comp-row">
+            <span>MFCC Dynamics (240 dims):</span>
+            <strong id="modal-comp-mfcc">97.4%</strong>
+          </div>
+          <div class="modal-comp-row">
+            <span>Log-Mel Energy (256 dims):</span>
+            <strong id="modal-comp-mel">98.1%</strong>
+          </div>
+          <div class="modal-comp-row">
+            <span>AST Transformer (768 dims):</span>
+            <strong id="modal-comp-ast">98.6%</strong>
+          </div>
+        </div>
+
+        <div class="modal-interp-box">
+          <h5 class="modal-box-heading">Acoustic Interpretation</h5>
+          <p class="modal-interp-text" id="modal-match-interp">
+            This reference recording exhibits highly congruent spectral envelope and temporal rhythm patterns.
+          </p>
+        </div>
+
+        <div class="medical-disclaimer-card" style="margin-top: 1rem;">
+          <span class="disclaimer-icon">⚠️</span>
+          <span class="disclaimer-body">
+            Acoustic similarity evaluates waveform features only and does NOT indicate medical similarity or diagnosis.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=2.2"></script>
+</body>
+</html>

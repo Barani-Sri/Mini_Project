@@ -1,0 +1,4 @@
+Comparison,V1 MFCC Mean,V2 MFCC Mean,V1 Mel Mean,V2 Mel Mean,V1 AST Mean,V2 AST Mean,V1 Final Mean,V2 Final Mean
+Same Recording,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+Same Patient (Diff Location),0.9983,0.9974,0.9446,0.9815,0.9927,0.9927,0.9856,0.9916
+Different Patients,0.997,0.9957,0.9215,0.9666,0.9892,0.9892,0.9792,0.9865

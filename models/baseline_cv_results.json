@@ -1,0 +1,245 @@
+{
+  "xgboost": {
+    "murmur_task": {
+      "recording_metrics": {
+        "accuracy": 0.8630229419703104,
+        "balanced_accuracy": 0.6840206921455505,
+        "sensitivity": 0.3811881188118812,
+        "recall": 0.3811881188118812,
+        "specificity": 0.9868532654792197,
+        "precision": 0.8816793893129771,
+        "f1": 0.532258064516129,
+        "tp": 231,
+        "fp": 31,
+        "tn": 2327,
+        "fn": 375,
+        "confusion_matrix": [
+          [
+            2327,
+            31
+          ],
+          [
+            375,
+            231
+          ]
+        ],
+        "roc_auc": 0.7889944210706058,
+        "pr_auc": 0.6550120282425388
+      },
+      "patient_metrics": {
+        "accuracy": 0.872852233676976,
+        "balanced_accuracy": 0.7500563489124661,
+        "sensitivity": 0.5418994413407822,
+        "recall": 0.5418994413407822,
+        "specificity": 0.9582132564841499,
+        "precision": 0.7698412698412699,
+        "f1": 0.6360655737704918,
+        "tp": 97,
+        "fp": 29,
+        "tn": 665,
+        "fn": 82,
+        "confusion_matrix": [
+          [
+            665,
+            29
+          ],
+          [
+            82,
+            97
+          ]
+        ],
+        "roc_auc": 0.8143947321816689,
+        "pr_auc": 0.7197020766724039,
+        "physionet_weighted_murmur_score": 0.723725613593455
+      }
+    },
+    "outcome_task": {
+      "accuracy": 0.6216790648246546,
+      "balanced_accuracy": 0.6193754804865916,
+      "sensitivity": 0.5494505494505495,
+      "recall": 0.5494505494505495,
+      "specificity": 0.6893004115226338,
+      "precision": 0.6234413965087282,
+      "f1": 0.5841121495327103,
+      "tp": 250,
+      "fp": 151,
+      "tn": 335,
+      "fn": 205,
+      "confusion_matrix": [
+        [
+          335,
+          151
+        ],
+        [
+          205,
+          250
+        ]
+      ],
+      "roc_auc": 0.6532808755030978,
+      "pr_auc": 0.6491995708740781,
+      "physionet_outcome_mean_cost": 26.046758767268862
+    }
+  },
+  "random_forest": {
+    "murmur_task": {
+      "recording_metrics": {
+        "accuracy": 0.832995951417004,
+        "balanced_accuracy": 0.719096146255847,
+        "sensitivity": 0.5264026402640264,
+        "recall": 0.5264026402640264,
+        "specificity": 0.9117896522476675,
+        "precision": 0.6053130929791272,
+        "f1": 0.5631067961165048,
+        "tp": 319,
+        "fp": 208,
+        "tn": 2150,
+        "fn": 287,
+        "confusion_matrix": [
+          [
+            2150,
+            208
+          ],
+          [
+            287,
+            319
+          ]
+        ],
+        "roc_auc": 0.7723619054017361,
+        "pr_auc": 0.6345961658528054
+      },
+      "patient_metrics": {
+        "accuracy": 0.7571592210767468,
+        "balanced_accuracy": 0.7353291581472478,
+        "sensitivity": 0.6983240223463687,
+        "recall": 0.6983240223463687,
+        "specificity": 0.7723342939481268,
+        "precision": 0.4416961130742049,
+        "f1": 0.5411255411255411,
+        "tp": 125,
+        "fp": 158,
+        "tn": 536,
+        "fn": 54,
+        "confusion_matrix": [
+          [
+            536,
+            158
+          ],
+          [
+            54,
+            125
+          ]
+        ],
+        "roc_auc": 0.7957110427768743,
+        "pr_auc": 0.6830582871888125,
+        "physionet_weighted_murmur_score": 0.7306482064191315
+      }
+    },
+    "outcome_task": {
+      "accuracy": 0.6099893730074389,
+      "balanced_accuracy": 0.6072875683986796,
+      "sensitivity": 0.5252747252747253,
+      "recall": 0.5252747252747253,
+      "specificity": 0.6893004115226338,
+      "precision": 0.6128205128205129,
+      "f1": 0.565680473372781,
+      "tp": 239,
+      "fp": 151,
+      "tn": 335,
+      "fn": 216,
+      "confusion_matrix": [
+        [
+          335,
+          151
+        ],
+        [
+          216,
+          239
+        ]
+      ],
+      "roc_auc": 0.6533306199972867,
+      "pr_auc": 0.6568995029317974,
+      "physionet_outcome_mean_cost": 27.09883103081828
+    }
+  },
+  "logistic_regression": {
+    "murmur_task": {
+      "recording_metrics": {
+        "accuracy": 0.7668690958164642,
+        "balanced_accuracy": 0.717382997841769,
+        "sensitivity": 0.6336633663366337,
+        "recall": 0.6336633663366337,
+        "specificity": 0.8011026293469041,
+        "precision": 0.4501758499413834,
+        "f1": 0.5263879369431117,
+        "tp": 384,
+        "fp": 469,
+        "tn": 1889,
+        "fn": 222,
+        "confusion_matrix": [
+          [
+            1889,
+            469
+          ],
+          [
+            222,
+            384
+          ]
+        ],
+        "roc_auc": 0.7843889350767137,
+        "pr_auc": 0.6493010482036282
+      },
+      "patient_metrics": {
+        "accuracy": 0.5876288659793815,
+        "balanced_accuracy": 0.6660119459694428,
+        "sensitivity": 0.7988826815642458,
+        "recall": 0.7988826815642458,
+        "specificity": 0.5331412103746398,
+        "precision": 0.30620985010706636,
+        "f1": 0.44272445820433437,
+        "tp": 143,
+        "fp": 324,
+        "tn": 370,
+        "fn": 36,
+        "confusion_matrix": [
+          [
+            370,
+            324
+          ],
+          [
+            36,
+            143
+          ]
+        ],
+        "roc_auc": 0.7973210117044741,
+        "pr_auc": 0.6859562920773042,
+        "physionet_weighted_murmur_score": 0.6828193832599119
+      }
+    },
+    "outcome_task": {
+      "accuracy": 0.6227417640807651,
+      "balanced_accuracy": 0.6220164609053498,
+      "sensitivity": 0.6,
+      "recall": 0.6,
+      "specificity": 0.6440329218106996,
+      "precision": 0.6121076233183856,
+      "f1": 0.6059933407325194,
+      "tp": 273,
+      "fp": 173,
+      "tn": 313,
+      "fn": 182,
+      "confusion_matrix": [
+        [
+          313,
+          173
+        ],
+        [
+          182,
+          273
+        ]
+      ],
+      "roc_auc": 0.6698819698819698,
+      "pr_auc": 0.6717235230984037,
+      "physionet_outcome_mean_cost": 24.0807651434644
+    }
+  }
+}

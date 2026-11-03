@@ -1,0 +1,78 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Testing & Caching
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+.mypy_cache/
+.idea/
+.vscode/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment Variables & Secrets
+.env
+.env.*
+*.pem
+*.key
+*.token
+*.cookie
+cookie.txt
+cookies.txt
+secrets/
+
+# Large Datasets & Gigabyte Binary Artifacts
+data/processed/*.h5
+data/processed/*.checkpoint.h5
+data/processed/module1_processed.h5
+data/processed/module2_features.h5
+data/processed/module2_features.*.h5
+data/processed/*.pt
+data/raw/zips/
+data/raw/circor/training_data/
+data/raw/circor/*.zip
+data/raw/circor/SHA256SUMS.txt
+data/hfref/*.zip
+
+# Preserve metadata, summary JSONs, result reports, and CSVs
+!data/processed/module1_summary.json
+!data/processed/module2_summary.json
+!data/processed/module3_results.json
+!data/processed/manual_test_40840.json
+!data/processed/circor_features.csv
+!data/processed/MODULE3_REPORT.md
+!data/raw/circor/training_data.csv
+
+# HuggingFace & PyTorch Cache Binaries
+*.safetensors
+*.ckpt
+
+# OS Temporary Files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environment
+.venv/
+
+# Large/local project data
+data/
+scratch/
+
+# Generated demo/output files
+demo_result.json
+src.zip
